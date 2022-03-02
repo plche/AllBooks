@@ -51,7 +51,10 @@ public class BooksController {
 	*/
 	// Nuestro método saveNewBook con @ModelAttribute; tomar en cuenta que debemos emplear también @Valid y BindingResult para que funcione correctamente
 	public String saveNewBook(@Valid @ModelAttribute("book") Book book, BindingResult result ) {
+
+		if (result.hasErrors()) return "new.jsp";
 		bookService.createBook(book);
+
 		return "redirect:/books";
 	}
 }
